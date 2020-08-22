@@ -62,7 +62,7 @@ public class ORGManager {
 		}
 		
 		builder = new CommandClientBuilder();
-		httpAdapter = new HttpAdapter(this.UPKEY, this.UPPRIVATE);
+		httpAdapter = new HttpAdapter(/*this.UPKEY, this.UPPRIVATE*/);
 		
 		builder = new CommandClientBuilder();
 		builder.setActivity(Activity.playing("UNPlayer - GTA V"));

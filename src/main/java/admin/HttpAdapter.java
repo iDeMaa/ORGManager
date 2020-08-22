@@ -14,7 +14,7 @@ public class HttpAdapter {
 	//private final String UPPrivate;
 	private HttpResponse<JsonNode> response;
 	
-	public HttpAdapter(String UPKey, String UPPrivate) {
+	public HttpAdapter(/*String UPKey, String UPPrivate*/) {
 		//this.UPKey = UPKey;
 		//this.UPPrivate = UPPrivate;
 	}
