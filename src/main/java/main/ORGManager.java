@@ -24,18 +24,18 @@ import net.dv8tion.jda.api.JDABuilder;
 public class ORGManager {
 	
 	private final String TOKEN;
-	private final String UPKEY;
-	private final String UPPRIVATE;
+	//private final String UPKEY;
+	//private final String UPPRIVATE;
 
 	private CommandClientBuilder builder;
 	private CommandClient client;
 	public static HttpAdapter httpAdapter;
 	public static Map<String, Integer> serverMap = new HashMap<>();
 	
-	public ORGManager(String token, String UPKey, String UPPrivate) {
+	public ORGManager(String token) {
 		this.TOKEN = token;
-		this.UPKEY = UPKey;
-		this.UPPRIVATE = UPPrivate;
+		//this.UPKEY = UPKey;
+		//this.UPPRIVATE = UPPrivate;
 	}
 	
 	public void start() {
