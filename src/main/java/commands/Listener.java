@@ -26,7 +26,7 @@ public class Listener extends ListenerAdapter{
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		eb.setTitle("Bienvenida");
-		String desc = "¡Bienvenido/a a **ORG Manager**!\n\nEste bot te va a ayudar a llevar un manejo mucho m\u00E1s organizado " +
+		String desc = "\u00A1Bienvenido/a a **ORG Manager**!\n\nEste bot te va a ayudar a llevar un manejo mucho m\u00E1s organizado " +
 						"del servidor de Discord de tu ORG, permiti\u00E9ndote automatizar la gesti\u00F3n de nombres y rangos de acuerdo a la informaci\u00F3n real del juego" +
 						"\n\n**IMPORTATE**: Actualmente s\u00F3lo funciona con ORGs de GTA V";
 		eb.setDescription(desc);

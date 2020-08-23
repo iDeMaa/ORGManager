@@ -55,8 +55,8 @@ public class Org extends Command{
 				return;
 			}
 			EmbedBuilder eb = new EmbedBuilder();
-			eb.setTitle("¡Listo!");
-			eb.setDescription("¡La ORG `" + id + "` fue vinculada con el servidor correctamente!\n\nAhora el bot comenzar\u00E1 a crear los roles autom\u00E1ticamente. Esto puede tardar unos minutos");
+			eb.setTitle("\u00A1Listo!");
+			eb.setDescription("\u00A1La ORG `" + id + "` fue vinculada con el servidor correctamente!\n\nAhora el bot comenzar\u00E1 a crear los roles autom\u00E1ticamente. Esto puede tardar unos minutos");
 			eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 			event.reply(eb.build());
 			createRoles(event, id);
@@ -84,8 +84,8 @@ public class Org extends Command{
 		if(guild.getRolesByName("Invitado", false).size() == 0) guild.createRole().setName("Invitado").queue();
 		guild.getTextChannelsByName("org-manager-temp", true).get(0).delete().complete();
 		EmbedBuilder eb = new EmbedBuilder();
-		eb.setTitle("¡Completado!");
-		eb.setDescription("¡La organizaci\u00F3n ya est\u00E1 vinculada al servidor y est\u00E1 todo listo para empezar a funcionar!");
+		eb.setTitle("\u00A1Completado!");
+		eb.setDescription("\u00A1La organizaci\u00F3n ya est\u00E1 vinculada al servidor y est\u00E1 todo listo para empezar a funcionar!");
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		guild.getDefaultChannel().sendMessage(eb.build());
 	}
