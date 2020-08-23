@@ -1,6 +1,9 @@
 package commands;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,6 +15,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -40,6 +44,30 @@ public class Listener extends ListenerAdapter{
 		
 		eb.setDescription("Una vez que tengas el n\u00FAmero, escribime por este canal dicho n\u00FAmero de la siguiente forma:\n\n`UP.org 130`\n\nY reemplaz\u00E1 el 130 por el n\u00FAmero de tu org");
 		channel.sendMessage(eb.build()).complete();
+	}
+	
+	@Override
+	public void onGuildLeave(GuildLeaveEvent event) {
+		try {
+			File file1 = new File(System.getProperty("user.dir") + "/resources/serverlist.cfg");
+			File file2 = new File(System.getProperty("user.dir") + "/resources/serverlist_new.cfg");
+			Scanner s = new Scanner(file1);
+			FileWriter fr = new FileWriter(file2, true);
+			while(s.hasNextLine()) {
+				String line = s.nextLine();
+				if(!line.split(";")[0].equals(event.getGuild().getId())) {
+					fr.write(line);
+				}
+			}
+			file1.delete();
+			file2.renameTo(new File(System.getProperty("user.dir") + "/resources/serverlist.cfg"));
+			
+			ORGManager.serverMap.remove(event.getGuild().getId());
+			fr.close();
+			s.close();
+		} catch (IOException e) {
+			System.out.println("Hubo un error al manejar el archivo.");
+		}
 	}
 	
 	@Override

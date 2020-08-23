@@ -46,6 +46,7 @@ public class ORGManager {
 					String line = s.nextLine();
 					serverMap.put(line.split(";")[0], Integer.parseInt(line.split(";")[1]));
 				}
+				s.close();
 			} else {
 				Files.createDirectory(Paths.get((System.getProperty("user.dir") + "/resources")));
 			}
