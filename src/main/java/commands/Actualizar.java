@@ -17,7 +17,7 @@ public class Actualizar extends Command{
 		this.help = "Actualiza los rangos de los usuarios en el Discord";
 		this.guildOnly = true;
 		this.aliases = new String[] {"actualizar"};
-		//this.cooldown = 3600;
+		this.cooldown = 3600;
 	}
 	
 	@Override

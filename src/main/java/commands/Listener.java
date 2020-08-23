@@ -26,19 +26,19 @@ public class Listener extends ListenerAdapter{
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		eb.setTitle("Bienvenida");
-		String desc = "¡Bienvenido/a a **ORG Manager**!\n\nEste bot te va a ayudar a llevar un manejo mucho más organizado " +
-						"del servidor de Discord de tu ORG, permitiéndote automatizar la gestión de nombres y rangos de acuerdo a la información real del juego" +
-						"\n\n**IMPORTATE**: Actualmente sólo funciona con ORGs de GTA V";
+		String desc = "¡Bienvenido/a a **ORG Manager**!\n\nEste bot te va a ayudar a llevar un manejo mucho m\u00E1s organizado " +
+						"del servidor de Discord de tu ORG, permiti\u00E9ndote automatizar la gesti\u00F3n de nombres y rangos de acuerdo a la informaci\u00F3n real del juego" +
+						"\n\n**IMPORTATE**: Actualmente s\u00F3lo funciona con ORGs de GTA V";
 		eb.setDescription(desc);
 		channel.sendMessage(eb.build()).complete();
 		
-		eb.setTitle("Organización");
-		eb.setDescription("Para comenzar y registrar tu ORG, ingresa al siguiente enlance: *https://unplayer.com/gtav/orgs*\nAnotá el número de tu ORG en la cual sos líder y va a pertenecer este servidor");
+		eb.setTitle("Organizaci\u00F3n");
+		eb.setDescription("Para comenzar y registrar tu ORG, ingresa al siguiente enlance: *https://unplayer.com/gtav/orgs*\nAnot\u00E1 el n\u00FAmero de tu ORG en la cual sos l\u00EDder y va a pertenecer este servidor");
 		channel.sendMessage(eb.build()).complete();
 		
 		channel.sendFile(new File(System.getProperty("user.dir") + "/resources/orgid.png")).queue();
 		
-		eb.setDescription("Una vez que tengas el número, escribime por este canal dicho número de la siguiente forma:\n\n`UP.org 130`\n\nY reemplazá el 130 por el número de tu org");
+		eb.setDescription("Una vez que tengas el n\u00FAmero, escribime por este canal dicho n\u00FAmero de la siguiente forma:\n\n`UP.org 130`\n\nY reemplaz\u00E1 el 130 por el n\u00FAmero de tu org");
 		channel.sendMessage(eb.build()).complete();
 	}
 	

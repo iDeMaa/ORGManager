@@ -114,7 +114,7 @@ public class HttpAdapter {
 			response = Unirest.get(url).asJson();
 			return response.getBody().getObject();
 		} catch(UnirestException e) {
-			System.out.println("Hubo un error al obtener la información del usuario");
+			System.out.println("Hubo un error al obtener la informaci\u00F3n del usuario");
 		}
 		return null;
 	}

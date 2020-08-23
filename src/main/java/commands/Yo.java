@@ -15,7 +15,7 @@ public class Yo extends Command{
 		this.name = "Yo";
 		this.cooldown = 60;
 		this.guildOnly = true;
-		this.help = "Muestra información sobre el usuario que utiliza el comando";
+		this.help = "Muestra informaci\u00F3n sobre el usuario que utiliza el comando";
 		this.aliases = new String[] {"yo"};
 	}
 
@@ -31,7 +31,7 @@ public class Yo extends Command{
 		String name = js.getString("name");
 		String forumLink = "https://foro.unplayer.com/member.php/" + ORGManager.httpAdapter.requestUserId(event.getMember().getId(), "forum");
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
-		eb.setAuthor(name + " - Información de usuario", forumLink);
+		eb.setAuthor(name + " - Informaci\u00F3n de usuario", forumLink);
 		String nivel = js.get("level").toString();
 		eb.addField("Nivel:", nivel, true);
 		int played_time = js.getInt("played_time");
@@ -40,16 +40,16 @@ public class Yo extends Command{
 		int certification = js.getInt("certification");
 		switch(certification) {
 			case 0:
-				eb.addField("Certificación:", "Ninguna", true);
+				eb.addField("Certificaci\u00F3n:", "Ninguna", true);
 				break;
 			case 1:
-				eb.addField("Certificación:", "Básica", true);
+				eb.addField("Certificaci\u00F3n:", "B\u00E1sica", true);
 				break;
 			case 2:
-				eb.addField("Certificación:", "Normal", true);
+				eb.addField("Certificaci\u00F3n:", "Normal", true);
 				break;
 			case 3:
-				eb.addField("Certificación:", "Completa", true);
+				eb.addField("Certificaci\u00F3n:", "Completa", true);
 				break;
 		}
 		boolean banned = js.getBoolean("banned");

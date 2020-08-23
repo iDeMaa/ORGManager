@@ -19,7 +19,7 @@ public class Org extends Command{
 
 	public Org() {
 		this.name = "Org";
-		this.help = "Setea la organización a la cual va a pertenecer la ORG";
+		this.help = "Setea la organizaci\u00F3n a la cual va a pertenecer la ORG";
 		this.guildOnly = true;
 		this.aliases = new String[] {"org"};
 	}
@@ -32,14 +32,14 @@ public class Org extends Command{
 		try {
 			id = Integer.parseInt(event.getArgs());
 		} catch(NumberFormatException e) {
-			event.reply("El ID ingresado es incorrecto. Por favor, ingrese únicamente el número de su ORG");
+			event.reply("El ID ingresado es incorrecto. Por favor, ingrese \u00FAnicamente el n\u00FAmero de su ORG");
 			return;
 		}
 		
 		int rank = ORGManager.httpAdapter.getMemberRank(event.getMember().getId(), id);
 		if(rank == 0 || rank == 1) {
 			if(ORGManager.serverMap.get(event.getGuild().getId()) != null) {
-				event.reply("Esta ORG ya está vinculada con un servidor de Discord. Si esto es un error, por favor contactate con `DeMaa#1038`");
+				event.reply("Esta ORG ya est\u00E1 vinculada con un servidor de Discord. Si esto es un error, por favor contactate con `DeMaa#1038`");
 				return;
 			}
 			
@@ -56,12 +56,12 @@ public class Org extends Command{
 			}
 			EmbedBuilder eb = new EmbedBuilder();
 			eb.setTitle("¡Listo!");
-			eb.setDescription("¡La ORG `" + id + "` fue vinculada con el servidor correctamente!\n\nAhora el bot comenzará a crear los roles automáticamente. Esto puede tardar unos minutos");
+			eb.setDescription("¡La ORG `" + id + "` fue vinculada con el servidor correctamente!\n\nAhora el bot comenzar\u00E1 a crear los roles autom\u00E1ticamente. Esto puede tardar unos minutos");
 			eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 			event.reply(eb.build());
 			createRoles(event, id);
 		} else {
-			event.reply("Únicamente el lider o sub-lideres de la ORG pueden vincularla con un servidor de Discord");
+			event.reply("\u00FAnicamente el lider o sub-lideres de la ORG pueden vincularla con un servidor de Discord");
 			return;
 		}
 	}
@@ -85,7 +85,7 @@ public class Org extends Command{
 		guild.getTextChannelsByName("org-manager-temp", true).get(0).delete().complete();
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setTitle("¡Completado!");
-		eb.setDescription("¡La organización ya está vinculada al servidor y está todo listo para empezar a funcionar!");
+		eb.setDescription("¡La organizaci\u00F3n ya est\u00E1 vinculada al servidor y est\u00E1 todo listo para empezar a funcionar!");
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		guild.getDefaultChannel().sendMessage(eb.build());
 	}
