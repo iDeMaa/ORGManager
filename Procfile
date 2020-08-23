@@ -1,1 +1,1 @@
-worker: java -jar "build/libs/'Sinner Bot-all.jar'" "NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.q_w9Fo4n1X-AkNDnGej4keIYDNQ"
+worker: java -jar build/libs/SinnerBot-all.jar "NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.q_w9Fo4n1X-AkNDnGej4keIYDNQ"
