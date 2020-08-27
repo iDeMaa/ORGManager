@@ -31,7 +31,7 @@ ORGManager es un bot de Discord que te va a ayudar a organizar más al servidor 
   * Certificación
   * Estado de banneo
   * Listado de organizaciones y el respectivo rango
-* Así mismo el bot tiene el comando *UP.usuario @Usuario* donde @Usuario es el tag de algún usuario que sea miembro del servidor y trae la información IC del mismo de la misma forma que el comando *UP.yo*. Ej: *UP.usuario @Thomas_Lawrence*
+* Así mismo el bot tiene el comando *UP.usuario @Usuario* donde @Usuario es el tag de algún usuario que sea miembro del servidor y trae la información IC del mismo de la misma forma que el comando *UP.yo*. Ej: *UP.usuario @Thomas_Lawrence* *(Se limitó a únicamente traer información de usuarios que pertenezcan al servidor para evitar posibles MG)*
 
 # Características
 - [x] Vinculación de servidor Discord con ORG
