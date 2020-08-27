@@ -1,5 +1,6 @@
 package commands;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONArray;
@@ -66,7 +67,10 @@ public class Listener extends ListenerAdapter {
 		String id = event.getMember().getId();
 		int orgId = -1;
 		try {
-			orgId = ORGManager.dbAdapter.getServer(id).getInt(2);
+			ResultSet rs = ORGManager.dbAdapter.getServer(id);
+			if(rs.next()) {
+				orgId = rs.getInt(2);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
