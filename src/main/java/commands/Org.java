@@ -1,8 +1,6 @@
 package commands;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.sql.SQLException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,18 +36,15 @@ public class Org extends Command{
 		
 		int rank = ORGManager.httpAdapter.getMemberRank(event.getMember().getId(), id);
 		if(rank == 0 || rank == 1) {
-			if(ORGManager.serverMap.get(event.getGuild().getId()) != null) {
+			if(ORGManager.dbAdapter.orgExists(id) == true) {
 				event.reply("Esta ORG ya est\u00E1 vinculada con un servidor de Discord. Si esto es un error, por favor contactate con `DeMaa#1038`");
 				return;
 			}
 			
 			try {
-				File file = new File(System.getProperty("user.dir") + "/resources/serverlist.cfg");
-				FileWriter fr = new FileWriter(file, true);
-				fr.write(guild.getId() + ";" + id + ";" + event.getMember().getUser().getAsTag() + ";" + event.getMember().getEffectiveName() + "\n");
-				fr.close();
-				ORGManager.serverMap.put(guild.getId(), id);
-			} catch (IOException e) {
+				ORGManager.dbAdapter.addServer(guild.getId(), id, event.getMember().getUser().getAsTag(), event.getMember().getEffectiveName());
+				//ORGManager.serverMap.put(guild.getId(), id);
+			} catch (SQLException e) {
 				event.reply("Hubo un error al intentar vincular la ORG. Contacta a `DeMaa#1038` en caso de que el error persista");
 				e.printStackTrace();
 				return;

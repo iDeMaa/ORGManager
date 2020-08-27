@@ -37,4 +37,6 @@ dependencies {
 	//compile group: 'org.apache.commons', name: 'commons-text', version: '1.9'
 	// https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java
 	compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 }

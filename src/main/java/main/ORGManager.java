@@ -1,20 +1,13 @@
 package main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 
+import admin.DBAdapter;
 import admin.HttpAdapter;
 import commands.*;
 import net.dv8tion.jda.api.entities.Activity;
@@ -30,38 +23,17 @@ public class ORGManager {
 	private CommandClientBuilder builder;
 	private CommandClient client;
 	public static HttpAdapter httpAdapter;
-	public static Map<String, Integer> serverMap = new HashMap<>();
+	public static DBAdapter dbAdapter;
+	//public static Map<String, Integer> serverMap = new HashMap<>();
 	
-	public ORGManager(String token) {
+	public ORGManager(String token, String dbpwd) {
 		this.TOKEN = token;
+		dbAdapter = new DBAdapter(dbpwd);
 		//this.UPKEY = UPKey;
 		//this.UPPRIVATE = UPPrivate;
 	}
 	
 	public void start() {
-		try {
-			if(Files.exists(Paths.get((System.getProperty("user.dir") + "/resources")))) {
-				Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/resources/serverlist.cfg"));
-				while(s.hasNextLine()) {
-					String line = s.nextLine();
-					serverMap.put(line.split(";")[0], Integer.parseInt(line.split(";")[1]));
-				}
-				s.close();
-			} else {
-				Files.createDirectory(Paths.get((System.getProperty("user.dir") + "/resources")));
-			}
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("Creando archivo de servidores");
-			try {
-				Files.createFile(Paths.get(System.getProperty("user.dir") + "/resources/serverlist.cfg"));
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		builder = new CommandClientBuilder();
 		httpAdapter = new HttpAdapter(/*this.UPKEY, this.UPPRIVATE*/);
 		

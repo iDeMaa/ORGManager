@@ -1,5 +1,6 @@
 package commands;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -25,7 +26,14 @@ public class Actualizar extends Command{
 		List<Member> members = event.getGuild().getMembers();
 		for(Member member : members) {
 			String discordId = member.getId();
-			int orgId = ORGManager.serverMap.get(event.getGuild().getId());
+			int orgId = -1;
+			
+			try {
+				orgId = ORGManager.dbAdapter.getServer(discordId).getInt(2);
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
 			JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
 			
 			int rank = ORGManager.httpAdapter.getMemberRank(discordId, orgId);
