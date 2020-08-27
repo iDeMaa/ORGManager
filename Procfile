@@ -1,1 +1,1 @@
-worker: java -jar build/libs/SinnerBot-all.jar NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.kWfkJ3D4r3C4tvHLcYZGGO10viM hsYLlhZWnVNwzbDNgri4dwLqr7a7KyIK
+worker: java -jar build/libs/SinnerBot-all.jar NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.IL91hZ-9eE_eE7kn_H4k1B2NnBA rkH7MwcGIzoP7-Pp4R1xejaaml1ObZMC
