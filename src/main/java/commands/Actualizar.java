@@ -32,6 +32,7 @@ public class Actualizar extends Command{
 				orgId = ORGManager.dbAdapter.getServer(discordId).getInt(2);
 			} catch(SQLException e) {
 				e.printStackTrace();
+				return;
 			}
 			
 			JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
@@ -48,13 +49,15 @@ public class Actualizar extends Command{
 			 
 			if(!userRole.getName().equals(rankName)) {
 				if(userRole.getName().equals("Invitado")) {
-					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[0]);
+					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]);
+					System.out.println("Se cambió el nombre al nuevo miembro de la ORG");
 				}
 				event.getGuild().removeRoleFromMember(member, userRole);
 				event.getGuild().addRoleToMember(member, event.getGuild().getRolesByName(rankName, true).get(0));
 				if(rank == -1) {
 					event.getGuild().modifyNickname(member, "[Invitado] " + member.getEffectiveName());
 				}
+				System.out.println("Se actualizó el rango de " + member.getEffectiveName());
 			}
 		}
 	}

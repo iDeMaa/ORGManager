@@ -21,6 +21,7 @@ public class Listener extends ListenerAdapter {
 	@Override
 	public void onGuildJoin(GuildJoinEvent event) {
 		Guild guild = event.getGuild();
+		System.out.println("Bot se unió a guild " + guild.getId());
 		TextChannel channel = guild.createTextChannel("ORG-Manager-Temp")
 				.addPermissionOverride(guild.getPublicRole(), 0, Permission.VIEW_CHANNEL.getRawValue()).complete();
 
@@ -50,6 +51,7 @@ public class Listener extends ListenerAdapter {
 
 	@Override
 	public void onGuildLeave(GuildLeaveEvent event) {
+		System.out.println("Bot salió de la guild " + event.getGuild().getId());
 		try {
 			ORGManager.dbAdapter.removeServer(event.getGuild().getId());
 		} catch (SQLException e) {
@@ -60,7 +62,6 @@ public class Listener extends ListenerAdapter {
 
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-
 		Guild guild = event.getGuild();
 		String id = event.getMember().getId();
 		int orgId = -1;
@@ -71,14 +72,7 @@ public class Listener extends ListenerAdapter {
 			return;
 		}
 
-		String name = ORGManager.httpAdapter.requestUserName(id);
-
-		if (name.equals("N/A")) {
-			event.getMember().modifyNickname("[No registrado] " + event.getMember().getEffectiveName()).queue();
-		} else {
-			event.getMember().modifyNickname(name).queue();
-		}
-
+		
 		int rank = ORGManager.httpAdapter.getMemberRank(id, orgId);
 		JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
 
@@ -90,12 +84,25 @@ public class Listener extends ListenerAdapter {
 				role = guild.getRolesByName(jsobj.getString("name"), true).get(0);
 			}
 		}
-
 		if (role == null) {
 			role = guild.getRolesByName("Invitado", true).get(0);
 		}
 
+		String name = ORGManager.httpAdapter.requestUserName(id);
+
+		if (name.equals("N/A")) {
+			event.getMember().modifyNickname("[No registrado] " + event.getMember().getEffectiveName()).queue();
+		} else if(role == null){
+			event.getMember().modifyNickname("[Invitado] " + name).queue();
+		} else {
+			event.getMember().modifyNickname(name).queue();
+		}
+		System.out.print("Se cambió nombre a " + event.getMember().getEffectiveName() + " - ");
+		
+		
+
 		event.getGuild().addRoleToMember(id, role).queue();
+		System.out.println("Se añadió el rol " + role.getName() + " al usuario");
 	}
 
 }

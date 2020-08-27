@@ -68,6 +68,7 @@ public class Usuario extends Command{
 			eb.addField(orgName, orgRankName, false);
 		}
 		event.reply(eb.build());
+		System.out.println("Se realizo busqueda al usuario " + member.getEffectiveName());
 	}
 
 }

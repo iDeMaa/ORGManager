@@ -83,6 +83,7 @@ public class Org extends Command{
 		eb.setDescription("\u00A1La organizaci\u00F3n ya est\u00E1 vinculada al servidor y est\u00E1 todo listo para empezar a funcionar!");
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		guild.getDefaultChannel().sendMessage(eb.build());
+		System.out.println("Se vinculo la org " + id + " al servidor de Discord " + guild.getId());
 	}
 
 }
