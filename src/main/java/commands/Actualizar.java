@@ -28,8 +28,7 @@ public class Actualizar extends Command {
 		System.out.println("Inicio de actualización de servidor " + event.getGuild().getId());
 		List<Member> members = event.getGuild().getMembers();
 		for (Member member : members) {
-			if (member.equals(event.getGuild().getSelfMember()))
-				return;
+			if (member.getUser().isBot()) return;
 			String discordId = member.getId();
 			int orgId = -1;
 
