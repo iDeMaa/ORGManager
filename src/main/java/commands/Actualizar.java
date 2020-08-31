@@ -26,12 +26,13 @@ public class Actualizar extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		boolean hasChanges = false;
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		System.out.println("Inicio de actualización de servidor " + event.getGuild().getId());
 		List<Member> members = event.getGuild().getMembers();
 		for (Member member : members) {
-			if (member.getUser().isBot()) return;
+			if (member.getUser().isBot()) break;
 			String discordId = member.getId();
 			int orgId = -1;
 
@@ -66,6 +67,7 @@ public class Actualizar extends Command {
 					event.getGuild().removeRoleFromMember(member, userRole).complete();
 					event.getGuild().addRoleToMember(member, event.getGuild().getRolesByName(rankName, true).get(0)).queue();
 					eb.addField(member.getEffectiveName(), userRole.getName() + " -> " + rankName, false);
+					hasChanges = true;
 				} catch (HierarchyException e) {
 					event.reply(
 							"El rol de **ORG Manager** debe ser el primero en la lista del servidor. Por favor, cambialo y vuelve a ejecutar el comando**");
@@ -78,6 +80,9 @@ public class Actualizar extends Command {
 				}
 				System.out.println("Se actualizó el rango de " + member.getEffectiveName());
 			}
+		}
+		if(!hasChanges) {
+			eb.setDescription("No hay rangos que actualizar");
 		}
 		event.reply(eb.build());
 		System.out.println("Fin de la actualización del servidor " + event.getGuild().getId());

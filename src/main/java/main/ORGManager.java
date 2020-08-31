@@ -56,9 +56,11 @@ public class ORGManager {
 				.setToken(this.TOKEN)
 				.addEventListeners(client, new Listener())
 				.build();
+			System.out.println("------------------------------------------BOT LISTO------------------------------------------");
 		} catch (LoginException e) {
 			System.out.println("Hubo un error en el login.");
 		}
+		
 	}
 	
 }
