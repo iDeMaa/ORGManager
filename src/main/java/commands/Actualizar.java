@@ -27,7 +27,8 @@ public class Actualizar extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
-		if(!event.getMember().hasPermission(Permission.ADMINISTRATOR)) return;
+		if (!event.getMember().hasPermission(Permission.ADMINISTRATOR))
+			return;
 		boolean hasChanges = false;
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
@@ -44,50 +45,53 @@ public class Actualizar extends Command {
 			return;
 		}
 		JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
-		
+
 		List<Member> members = event.getGuild().getMembers();
 		for (Member member : members) {
 			System.out.println("Procesando a " + member.getEffectiveName());
-			if (member.getUser().isBot()) break;
-			String discordId = member.getId();
-			
-			eb.setTitle("Actualización de rangos en " + ORGManager.httpAdapter.requestORGName(orgId) + " finalizada");
+			if (!member.getUser().isBot()) {
+				String discordId = member.getId();
 
-			
+				eb.setTitle(
+						"Actualización de rangos en " + ORGManager.httpAdapter.requestORGName(orgId) + " finalizada");
 
-			int rank = ORGManager.httpAdapter.getMemberRank(discordId, orgId);
-			Role userRole = member.getRoles().get(0);
-			String rankName = null;
-			if (rank != -1) {
-				rankName = rankArray.getJSONObject(rank).getString("name");
-			} else {
-				rankName = "Invitado";
+				int rank = ORGManager.httpAdapter.getMemberRank(discordId, orgId);
+				Role userRole = member.getRoles().get(0);
+				String rankName = null;
+				if (rank != -1) {
+					rankName = rankArray.getJSONObject(rank).getString("name");
+				} else {
+					rankName = "Invitado";
+				}
+				System.out.println(userRole.getName() + " - " + rankName);
+				if (!userRole.getName().equals(rankName)) {
+					if (member.getEffectiveName().contains("Invitado")) {
+						event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).complete();
+						System.out.println("Se cambió el nombre al nuevo miembro de la ORG");
+					}
+					try {
+						event.getGuild().removeRoleFromMember(member, userRole).complete();
+						event.getGuild().addRoleToMember(member, event.getGuild().getRolesByName(rankName, true).get(0))
+								.queue();
+						eb.addField(member.getEffectiveName(), userRole.getName() + " -> " + rankName, false);
+						hasChanges = true;
+					} catch (HierarchyException e) {
+						event.reply(
+								"El rol de **ORG Manager** debe ser el primero en la lista del servidor. Por favor, cambialo y vuelve a ejecutar el comando**");
+						e.printStackTrace();
+						return;
+					}
+
+					if (rank == -1) {
+						event.getGuild().modifyNickname(member, "[Invitado] " + member.getEffectiveName()).queue();
+						;
+					}
+					System.out.println("Se actualizó el rango de " + member.getEffectiveName());
+				}
 			}
-			System.out.println(userRole.getName() + " - " + rankName);
-			if (!userRole.getName().equals(rankName)) {
-				if (member.getEffectiveName().contains("Invitado")) {
-					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).complete();
-					System.out.println("Se cambió el nombre al nuevo miembro de la ORG");
-				}
-				try {
-					event.getGuild().removeRoleFromMember(member, userRole).complete();
-					event.getGuild().addRoleToMember(member, event.getGuild().getRolesByName(rankName, true).get(0)).queue();
-					eb.addField(member.getEffectiveName(), userRole.getName() + " -> " + rankName, false);
-					hasChanges = true;
-				} catch (HierarchyException e) {
-					event.reply(
-							"El rol de **ORG Manager** debe ser el primero en la lista del servidor. Por favor, cambialo y vuelve a ejecutar el comando**");
-					e.printStackTrace();
-					return;
-				}
 
-				if (rank == -1) {
-					event.getGuild().modifyNickname(member, "[Invitado] " + member.getEffectiveName()).queue();;
-				}
-				System.out.println("Se actualizó el rango de " + member.getEffectiveName());
-			}
 		}
-		if(!hasChanges) {
+		if (!hasChanges) {
 			eb.setDescription("No hay rangos que actualizar");
 		}
 		event.reply(eb.build());
