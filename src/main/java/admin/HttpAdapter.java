@@ -75,7 +75,7 @@ public class HttpAdapter {
 		}
 		return null;
 	}
-	
+
 	public String requestORGRankName(int orgId, int orgRankIndex) {
 		String url = "https://unplayer.com/api/1.0/gtav/org/" + orgId;
 		try {

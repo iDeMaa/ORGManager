@@ -63,6 +63,7 @@ public class Listener extends ListenerAdapter {
 
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+		if(event.getMember().getUser().isBot()) return;
 		Guild guild = event.getGuild();
 		String id = event.getMember().getId();
 		int orgId = -1;

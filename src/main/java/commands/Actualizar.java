@@ -9,6 +9,7 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import main.ORGManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.exceptions.HierarchyException;
@@ -25,6 +26,8 @@ public class Actualizar extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		EmbedBuilder eb = new EmbedBuilder();
+		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		System.out.println("Inicio de actualización de servidor " + event.getGuild().getId());
 		List<Member> members = event.getGuild().getMembers();
 		for (Member member : members) {
@@ -41,6 +44,7 @@ public class Actualizar extends Command {
 				e.printStackTrace();
 				return;
 			}
+			eb.setTitle("Actualización de rangos en " + ORGManager.httpAdapter.requestORGName(orgId) + " finalizada");
 
 			JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
 
@@ -54,13 +58,14 @@ public class Actualizar extends Command {
 			}
 
 			if (!userRole.getName().equals(rankName)) {
-				if (userRole.getName().equals("Invitado")) {
+				if (member.getEffectiveName().contains("Invitado")) {
 					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).queue();;
 					System.out.println("Se cambió el nombre al nuevo miembro de la ORG");
 				}
 				try {
 					event.getGuild().removeRoleFromMember(member, userRole).complete();
 					event.getGuild().addRoleToMember(member, event.getGuild().getRolesByName(rankName, true).get(0)).queue();
+					eb.addField(member.getEffectiveName(), userRole.getName() + " -> " + rankName, false);
 				} catch (HierarchyException e) {
 					event.reply(
 							"El rol de **ORG Manager** debe ser el primero en la lista del servidor. Por favor, cambialo y vuelve a ejecutar el comando**");
@@ -74,6 +79,7 @@ public class Actualizar extends Command {
 				System.out.println("Se actualizó el rango de " + member.getEffectiveName());
 			}
 		}
+		event.reply(eb.build());
 		System.out.println("Fin de la actualización del servidor " + event.getGuild().getId());
 	}
 
