@@ -10,6 +10,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 
 import main.ORGManager;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.exceptions.HierarchyException;
@@ -26,6 +27,7 @@ public class Actualizar extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		if(!event.getMember().hasPermission(Permission.ADMINISTRATOR)) return;
 		boolean hasChanges = false;
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
