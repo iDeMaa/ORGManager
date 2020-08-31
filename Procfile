@@ -1,1 +1,1 @@
-worker: java -jar build/libs/ORGManager-all.jar NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.IL91hZ-9eE_eE7kn_H4k1B2NnBA rkH7MwcGIzoP7-Pp4R1xejaaml1ObZMC
+worker: java -jar build/libs/ORGManager-all.jar NzQ2NDYyOTc2NTI1MjA1NjE0.X0Ar0g.Z_AzseBzv-I1pUHDV3-KmgqvRYE rkH7MwcGIzoP7-Pp4R1xejaaml1ObZMC
