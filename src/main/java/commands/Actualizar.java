@@ -32,24 +32,28 @@ public class Actualizar extends Command {
 		EmbedBuilder eb = new EmbedBuilder();
 		eb.setFooter("Programado por DeMaa#1038/Thomas_Lawrence", "https://i.imgur.com/x9SxBMU.jpg");
 		System.out.println("Inicio de actualización de servidor " + event.getGuild().getId());
+		int orgId = -1;
+
+		try {
+			ResultSet rs = ORGManager.dbAdapter.getServer(event.getGuild().getId());
+			if (rs.next()) {
+				orgId = rs.getInt(2);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
+		JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
+		
 		List<Member> members = event.getGuild().getMembers();
 		for (Member member : members) {
+			System.out.println("Procesando a " + member.getEffectiveName());
 			if (member.getUser().isBot()) break;
 			String discordId = member.getId();
-			int orgId = -1;
-
-			try {
-				ResultSet rs = ORGManager.dbAdapter.getServer(event.getGuild().getId());
-				if (rs.next()) {
-					orgId = rs.getInt(2);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return;
-			}
+			
 			eb.setTitle("Actualización de rangos en " + ORGManager.httpAdapter.requestORGName(orgId) + " finalizada");
 
-			JSONArray rankArray = ORGManager.httpAdapter.requestORGRanks(orgId);
+			
 
 			int rank = ORGManager.httpAdapter.getMemberRank(discordId, orgId);
 			Role userRole = member.getRoles().get(0);
@@ -59,7 +63,7 @@ public class Actualizar extends Command {
 			} else {
 				rankName = "Invitado";
 			}
-			System.out.println(member.getEffectiveName() + ": " + userRole.getName() + " - " + rankName);
+			System.out.println(userRole.getName() + " - " + rankName);
 			if (!userRole.getName().equals(rankName)) {
 				if (member.getEffectiveName().contains("Invitado")) {
 					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).complete();
