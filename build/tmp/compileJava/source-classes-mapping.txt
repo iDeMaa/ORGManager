@@ -10,9 +10,9 @@ main/Main.java
  main.Main
 commands/Org.java
  commands.Org
+commands/Yo.java
+ commands.Yo
 commands/Actualizar.java
  commands.Actualizar
 main/ORGManager.java
  main.ORGManager
-commands/Yo.java
- commands.Yo

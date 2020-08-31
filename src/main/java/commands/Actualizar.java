@@ -60,7 +60,7 @@ public class Actualizar extends Command {
 
 			if (!userRole.getName().equals(rankName)) {
 				if (member.getEffectiveName().contains("Invitado")) {
-					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).queue();;
+					event.getGuild().modifyNickname(member, member.getEffectiveName().split(" ")[1]).complete();
 					System.out.println("Se cambió el nombre al nuevo miembro de la ORG");
 				}
 				try {
