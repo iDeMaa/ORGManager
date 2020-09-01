@@ -20,8 +20,7 @@ public class Usuario extends Command{
 	
 	@Override
 	protected void execute(CommandEvent event) {
-		String discordId = event.getArgs().substring(event.getArgs().indexOf('!')+1, event.getArgs().length()-1);
-		Member member = event.getGuild().getMemberById(discordId);
+		Member member = event.getMessage().getMentionedMembers().get(0);
 		JSONObject js = ORGManager.httpAdapter.requestUserData(member.getId());
 		
 		if(js == null) return;

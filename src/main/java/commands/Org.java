@@ -42,8 +42,8 @@ public class Org extends Command{
 			}
 			
 			try {
+				new ActualizarNombres().execute(event);
 				ORGManager.dbAdapter.addServer(guild.getId(), id, event.getMember().getUser().getAsTag(), event.getMember().getEffectiveName());
-				//ORGManager.serverMap.put(guild.getId(), id);
 			} catch (SQLException e) {
 				event.reply("Hubo un error al intentar vincular la ORG. Contacta a `DeMaa#1038` en caso de que el error persista");
 				e.printStackTrace();
