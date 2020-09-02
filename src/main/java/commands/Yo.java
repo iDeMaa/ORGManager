@@ -63,8 +63,8 @@ public class Yo extends Command{
 			eb.addField("Estado:", "En l\u00EDnea", true);
 		}else {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			Date date = new Date(js.getInt("last_seen"));
-			eb.addField("\u00FAltima vez:", format.format(date), true);
+			Date date = new Date(js.getInt("last_seen") * 1000L);
+			eb.addField("\u00DAltima vez:", format.format(date), true);
 		}
 		event.reply(eb.build());
 		eb.clearFields();
