@@ -1,5 +1,9 @@
 package commands;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.jagrosh.jdautilities.command.Command;
@@ -53,6 +57,16 @@ public class Usuario extends Command{
 		}
 		boolean banned = js.getBoolean("banned");
 		eb.addField("Banneado: ", banned ? "Si":"No", true);
+		boolean estado = js.getBoolean("online");
+		if(estado) {
+			eb.addField("Estado:", "En l\u00EDnea", true);
+		}else {
+			Timestamp ts = Timestamp.valueOf(js.getString("last_seen"));
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			Date date = ts;
+			eb.addField("\u00FAltima vez:", format.format(date), true);
+		}
+		
 		event.reply(eb.build());
 		eb.clearFields();
 		

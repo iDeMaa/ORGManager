@@ -5,6 +5,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 
 import main.ORGManager;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.exceptions.HierarchyException;
 
 public class ActualizarNombres extends Command{
 	
@@ -17,14 +18,19 @@ public class ActualizarNombres extends Command{
 
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.println("Actualizando nombres del servidor " + event.getGuild().getId());
 		for(Member member : event.getGuild().getMembers()) {
 			if(!member.getUser().isBot()) {
 				String name = ORGManager.httpAdapter.requestUserName(member.getId());
 				if(!member.getEffectiveName().equals(name)){
-					if (name.equals("N/A")) {
-						event.getMember().modifyNickname("[No registrado] " + event.getMember().getEffectiveName()).queue();
-					} else {
-						event.getMember().modifyNickname(name).queue();
+					try {
+						if (name.equals("N/A")) {
+							event.getMember().modifyNickname("[No registrado] " + event.getMember().getEffectiveName()).queue();
+						} else {
+							event.getMember().modifyNickname(name).queue();
+						}
+					} catch (HierarchyException e) {
+						event.reply("El rol de **ORG Manager** debe ser el primero en la lista del servidor. Por favor, cambialo y vuelve a ejecutar el comando**");
 					}
 					System.out.print("Se cambió nombre a " + event.getMember().getEffectiveName() + " - ");
 				}
