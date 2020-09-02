@@ -61,9 +61,8 @@ public class Usuario extends Command{
 		if(estado) {
 			eb.addField("Estado:", "En l\u00EDnea", true);
 		}else {
-			Timestamp ts = Timestamp.valueOf(js.getString("last_seen"));
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			Date date = ts;
+			Date date = new Date(js.getInt("last_seen"));
 			eb.addField("\u00FAltima vez:", format.format(date), true);
 		}
 		
