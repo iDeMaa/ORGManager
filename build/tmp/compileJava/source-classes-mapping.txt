@@ -10,6 +10,8 @@ main/Main.java
  main.Main
 admin/DBAdapter.java
  admin.DBAdapter
+commands/Online.java
+ commands.Online
 commands/Org.java
  commands.Org
 commands/Actualizar.java

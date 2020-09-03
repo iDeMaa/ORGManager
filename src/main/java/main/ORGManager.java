@@ -47,7 +47,8 @@ public class ORGManager {
 				new Yo(),
 				new Usuario(),
 				new Actualizar(),
-				new ActualizarNombres()
+				new ActualizarNombres(),
+				new Online()
 				);
 		builder.setOwnerId("137013304961794048");
 		client = builder.build();
