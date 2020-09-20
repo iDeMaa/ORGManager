@@ -63,6 +63,7 @@ public class DBAdapter {
 	}
 
 	public ResultSet getServer(String discordId) {
+		System.out.println("Discord ID" + discordId);
 		String query = "SELECT * FROM serverlist WHERE discordId = '" + discordId + "'";
 		try {
 			PreparedStatement statement = getConnection().prepareStatement(query);

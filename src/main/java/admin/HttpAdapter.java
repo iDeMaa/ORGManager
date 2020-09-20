@@ -66,6 +66,7 @@ public class HttpAdapter {
 	}
 	
 	public JSONArray requestORGRanks(int orgId) {
+		System.out.println("ORG ID: " + orgId);
 		String url = "https://unplayer.com/api/1.0/gtav/org/" + orgId;
 		try {
 			response = Unirest.get(url).asJson();

@@ -68,7 +68,7 @@ public class Listener extends ListenerAdapter {
 		String id = event.getMember().getId();
 		int orgId = -1;
 		try {
-			ResultSet rs = ORGManager.dbAdapter.getServer(id);
+			ResultSet rs = ORGManager.dbAdapter.getServer(guild.getId());
 			if(rs.next()) {
 				orgId = rs.getInt(2);
 			}
