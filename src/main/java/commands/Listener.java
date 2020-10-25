@@ -97,8 +97,6 @@ public class Listener extends ListenerAdapter {
 
 		if (name.equals("N/A")) {
 			event.getMember().modifyNickname("[No registrado] " + event.getMember().getEffectiveName()).queue();
-		} else if(role == null){
-			event.getMember().modifyNickname("[Invitado] " + name).queue();
 		} else {
 			event.getMember().modifyNickname(name).queue();
 		}
